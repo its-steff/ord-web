@@ -1,0 +1,75 @@
+---
+
+---
+
+<div id="megamenu">
+  <nav>
+    <ul>
+      <li><a href="/">stuff</a></li>
+      <li><a href="/">links</a></li>
+      <li><a href="/">wow</a></li>
+    </ul>
+  </nav>
+  <button id="closeButton">
+    <span id="topline"></span>
+    <span id="bottomline"></span>
+  </button>
+</div>
+
+<style lang="scss">
+  #megamenu {
+    background-color: var(--orange);
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 30px 20px;
+    display: none;
+
+    &.show {
+      display: flex;
+    }
+
+    nav {
+      font-size: 3rem;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+
+      span {
+        background-color: black;
+        width: 100%;
+        height: 5px;
+      }
+
+      #topline {
+        transform: rotate(45deg);
+        transform-origin: 30%;
+      }
+
+      #bottomline {
+        transform: rotate(-45deg);
+        transform-origin: 30%;
+      }
+      &:hover {
+        cursor: pointer;
+        opacity: 0.5;
+      }
+    }
+
+    @media screen and (min-width: 769px) {
+      display: none;
+    }
+  }
+</style>

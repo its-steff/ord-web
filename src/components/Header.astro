@@ -1,0 +1,41 @@
+---
+import Hamburger from "./Hamburger.astro";
+import Menu from "./Menu.astro";
+import Navbar from "./Navbar.astro";
+---
+
+<header>
+  <div class="mobileContainer">
+    <img src="../../ordLogo.svg" class="logo" />
+    <Hamburger />
+  </div>
+  <Menu />
+  <div class="desktopContainer">
+    <Navbar />
+  </div>
+</header>
+
+<style lang="scss">
+  header {
+    .mobileContainer {
+      display: flex;
+      align-items: center;
+
+      justify-content: space-between;
+      .logo {
+        width: 100px;
+      }
+      display: flex;
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+    }
+    .desktopContainer {
+      display: none;
+      @media screen and (min-width: 768px) {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+</style>

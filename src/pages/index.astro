@@ -1,0 +1,106 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Wrapper from "../components/Wrapper.astro";
+
+import { getHomePageData, urlForImage, getAssetData } from "../sanity/api";
+import { PortableText } from "astro-portabletext";
+
+const pageData = await getHomePageData();
+---
+
+<Layout title="Oslo Roller Derby">
+  <main>
+    <section>
+      <Wrapper>
+        <div class="heroContainer">
+          <div class="imageContainer">
+            <img
+              src={urlForImage(pageData.hero.image.src)}
+              alt={pageData.hero.image.alt}
+            />
+          </div>
+          <div class="textContainer">
+            <PortableText value={pageData.hero.text} />
+            <button>
+              {pageData.hero.buttonText}
+            </button>
+          </div>
+        </div>
+      </Wrapper>
+    </section>
+  </main>
+</Layout>
+
+<style lang="scss" is:global>
+  main {
+    section {
+      background-image: url(/public/stripes.png);
+      background-repeat: no-repeat;
+      background-size: 500px;
+      background-position: 0% 90%;
+      margin-top: 4rem;
+
+      .imageContainer {
+        display: none;
+      }
+      .textContainer {
+        h1:nth-child(3) {
+          margin-bottom: 2rem;
+        }
+        p {
+          font-size: 1.6rem;
+          font-weight: 400;
+          line-height: 29px;
+        }
+      }
+      button {
+        all: unset;
+        border: none;
+        background-color: var(--yellow);
+        padding: 20px 100px;
+        font-size: 2rem;
+        border-radius: 6px;
+        margin-top: 50px;
+        color: black;
+
+        &:hover {
+          opacity: 0.5;
+          cursor: pointer;
+        }
+      }
+    }
+
+    @media screen and (min-width: 568px) {
+      section {
+        background-size: 800px;
+        background-position: 100% 40%;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      section {
+        background-size: 900px;
+        background-position: 90% 0%;
+
+        .heroContainer {
+          display: flex;
+          justify-content: center;
+          gap: 8rem;
+
+          .imageContainer {
+            display: inline-block;
+
+            width: 400px;
+            img {
+              width: 100%;
+            }
+          }
+          .textContainer {
+            margin-top: 5rem;
+            max-width: 500px;
+          }
+        }
+      }
+    }
+  }
+</style>

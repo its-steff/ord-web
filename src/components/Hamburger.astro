@@ -1,0 +1,34 @@
+<button id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<style lang="scss">
+  #hamburger {
+    height: 50px;
+    width: 50px;
+
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    span {
+      background-color: var(--orange);
+      width: 100%;
+      height: 3.5px;
+      border-radius: 10px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    @media screen and (min-width: 1024px) {
+      display: none;
+    }
+  }
+</style>

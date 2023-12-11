@@ -10,7 +10,7 @@ const pageData = await getHomePageData();
 
 <Layout title="Oslo Roller Derby">
   <main>
-    <section>
+    <section class="heroSection">
       <Wrapper>
         <div class="heroContainer">
           <div class="imageContainer">
@@ -28,12 +28,13 @@ const pageData = await getHomePageData();
         </div>
       </Wrapper>
     </section>
+    <section class="eventSection">Events will go here</section>
   </main>
 </Layout>
 
 <style lang="scss" is:global>
   main {
-    section {
+    .heroSection {
       background-image: url(/public/stripes.png);
       background-repeat: no-repeat;
       background-size: 500px;
@@ -57,7 +58,7 @@ const pageData = await getHomePageData();
         all: unset;
         border: none;
         background-color: var(--yellow);
-        padding: 20px 100px;
+        padding: 20px 50px;
         font-size: 2rem;
         border-radius: 6px;
         margin-top: 50px;
@@ -69,16 +70,25 @@ const pageData = await getHomePageData();
         }
       }
     }
+    .eventSection {
+      clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+      background-image: url(/public/concreteWall.png);
+      background-color: var(--yellow);
+      background-blend-mode: color-burn;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+    }
 
     @media screen and (min-width: 568px) {
-      section {
+      .heroSection {
         background-size: 800px;
-        background-position: 100% 40%;
+        background-position: top right;
       }
     }
 
     @media screen and (min-width: 1024px) {
-      section {
+      .heroSection {
         background-size: 900px;
         background-position: 90% 0%;
 

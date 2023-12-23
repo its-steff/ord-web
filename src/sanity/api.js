@@ -38,6 +38,7 @@ export async function getEventData() {
       'time': time,
       'date': date,
       'location': location,
+      'link': link,
   }`;
 
   const events = await useSanityClient().fetch(query);

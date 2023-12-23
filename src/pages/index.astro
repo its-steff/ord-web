@@ -14,8 +14,6 @@ import { PortableText } from "astro-portabletext";
 const pageData = await getHomePageData();
 const assetData = await getAssetData("OhOhOslo");
 const eventData = await getEventData();
-
-console.log(assetData);
 ---
 
 <Layout title="Oslo Roller Derby">
@@ -79,7 +77,7 @@ console.log(assetData);
           margin-bottom: var(--space-20);
         }
         p {
-          font-size: var(--font-size-16);
+          font-size: var(--font-size-18);
           font-weight: 400;
           line-height: 29px;
         }
@@ -162,6 +160,19 @@ console.log(assetData);
             margin-top: 5rem;
             max-width: 500px;
           }
+        }
+      }
+      .eventSection {
+        flex-direction: row;
+        justify-content: space-evenly;
+        height: 130vh;
+        clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+
+        .eventSectionimageContainer {
+          margin-top: 0;
+        }
+        .eventContainer {
+          margin-top: 0;
         }
       }
     }

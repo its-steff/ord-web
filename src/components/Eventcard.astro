@@ -19,7 +19,7 @@ const { title, time, image, date, location, link } = Astro.props;
 const formattedDate = dayjs(`'${date}'`).format("dddd D MMMM");
 ---
 
-<a class="event" href={link}>
+<a class="event" href={link} target="_blank">
   <div class="imageContainer">
     <img src={urlForImage(image.src)} alt={image.alt} />
   </div>
@@ -54,17 +54,27 @@ const formattedDate = dayjs(`'${date}'`).format("dddd D MMMM");
 
     .textContainer {
       h3 {
-        font-size: var(--font-size-20);
+        font-size: var(--font-size-24);
         color: var(--orange);
         text-decoration: underline;
+        font-weight: 400;
       }
       .time {
         margin-top: 1rem;
         display: flex;
         flex-direction: column;
-        font-size: var(--font-size-16);
+        font-size: var(--font-size-18);
         font-weight: 300;
       }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @media screen and (min-width: 1024px) {
+      //width: 90%;
+      max-width: 600px;
     }
   }
 </style>

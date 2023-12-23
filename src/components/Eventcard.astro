@@ -1,0 +1,70 @@
+---
+import { urlForImage } from "../sanity/api";
+import dayjs from "dayjs";
+
+interface Props {
+  title?: string;
+  time?: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+  date?: string | any;
+  location?: string;
+  link?: string;
+}
+
+const { title, time, image, date, location, link } = Astro.props;
+
+const formattedDate = dayjs(`'${date}'`).format("dddd D MMMM");
+---
+
+<a class="event" href={link}>
+  <div class="imageContainer">
+    <img src={urlForImage(image.src)} alt={image.alt} />
+  </div>
+  <div class="textContainer">
+    <h3>{title}</h3>
+    <div class="time">
+      <span>{formattedDate}</span>
+      <span>{time}</span>
+      <span>{location}</span>
+    </div>
+  </div>
+</a>
+
+<style lang="scss">
+  a {
+    width: 100%;
+    display: inline-flex;
+    gap: 1.5rem;
+    background-color: black;
+    width: 90vw;
+    height: 200px;
+    padding: 2rem;
+
+    .imageContainer {
+      align-self: center;
+      max-width: 150px;
+      height: auto;
+      img {
+        width: 100%;
+      }
+    }
+
+    .textContainer {
+      h3 {
+        font-size: var(--font-size-20);
+        color: var(--orange);
+        text-decoration: underline;
+      }
+      .time {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        font-size: var(--font-size-16);
+        font-weight: 300;
+      }
+    }
+  }
+</style>

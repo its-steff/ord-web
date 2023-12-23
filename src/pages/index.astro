@@ -1,11 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Wrapper from "../components/Wrapper.astro";
+import Eventcard from "../components/Eventcard.astro";
 
-import { getHomePageData, urlForImage, getAssetData } from "../sanity/api";
+import {
+  getHomePageData,
+  urlForImage,
+  getEventData,
+  getAssetData,
+} from "../sanity/api";
 import { PortableText } from "astro-portabletext";
 
 const pageData = await getHomePageData();
+const assetData = await getAssetData("OhOhOslo");
+const eventData = await getEventData();
+
+console.log(assetData);
 ---
 
 <Layout title="Oslo Roller Derby">
@@ -28,7 +38,27 @@ const pageData = await getHomePageData();
         </div>
       </Wrapper>
     </section>
-    <section class="eventSection">Events will go here</section>
+    <section class="eventSection">
+      <div class="eventSectionimageContainer">
+        <img src={urlForImage(assetData.asset.src)} alt={assetData.asset.alt} />
+      </div>
+      <div class="eventContainer">
+        {
+          eventData.length > 0
+            ? eventData.map((event) => (
+                <Eventcard
+                  title={event.title}
+                  time={event.time}
+                  date={event.date}
+                  image={event.image}
+                  location={event.location}
+                  link={event.link}
+                />
+              ))
+            : "nothing here"
+        }
+      </div>
+    </section>
   </main>
 </Layout>
 
@@ -39,17 +69,17 @@ const pageData = await getHomePageData();
       background-repeat: no-repeat;
       background-size: 500px;
       background-position: 0% 90%;
-      margin-top: 4rem;
+      margin-top: var(--space-40);
 
       .imageContainer {
         display: none;
       }
       .textContainer {
         h1:nth-child(3) {
-          margin-bottom: 2rem;
+          margin-bottom: var(--space-20);
         }
         p {
-          font-size: 1.6rem;
+          font-size: var(--font-size-16);
           font-weight: 400;
           line-height: 29px;
         }
@@ -59,7 +89,7 @@ const pageData = await getHomePageData();
         border: none;
         background-color: var(--yellow);
         padding: 20px 50px;
-        font-size: 2rem;
+        font-size: var(--font-size-20);
         border-radius: 6px;
         margin-top: 50px;
         color: black;
@@ -71,13 +101,36 @@ const pageData = await getHomePageData();
       }
     }
     .eventSection {
-      clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 90%);
       background-image: url(/public/concreteWall.png);
-      background-color: var(--yellow);
       background-blend-mode: color-burn;
       background-repeat: no-repeat;
       background-size: cover;
-      height: 100vh;
+      background-color: var(--yellow);
+      height: 200vh;
+      padding: 0px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+
+      .eventSectionimageContainer {
+        width: 300px;
+        height: auto;
+        margin-top: 150px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .eventContainer {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+      }
     }
 
     @media screen and (min-width: 568px) {

@@ -20,13 +20,28 @@ export async function getHomePageData() {
 export async function getAssetData(assetTitle) {
   const query = groq`*[_type == "assets" && title == "${assetTitle}"]{
     'asset': {
-      'src': image.image.asset->url,
-      'alt': image.image.alt,
+      'src': image.asset->url,
+      'alt': image.alt,
     },
   }`;
   const asset = await useSanityClient().fetch(query);
-  console.log("inside the getAsset function", asset);
   return asset[0];
+}
+
+export async function getEventData() {
+  const query = groq`*[_type == "events"]{
+      'image': {
+        'src': image.asset->url,
+        'alt': image.alt,
+      },
+      'title': title,
+      'time': time,
+      'date': date,
+      'location': location,
+  }`;
+
+  const events = await useSanityClient().fetch(query);
+  return events;
 }
 
 export const imageBuilder = createImageBuilder(useSanityClient());
